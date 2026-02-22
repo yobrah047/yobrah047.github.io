@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brian Kinoti • Aspiring Cybersecurity Professional</title>
+  
+  <!-- Fonts: monospace for terminal + modern -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #0a0e14;
+      --text: #e0f7fa;
+      --accent: #00ff9d;
+      --accent-glow: #00ff9d33;
+      --secondary: #ff00aa;
+      --gray: #8a8f98;
+      --card: #11151c;
+      --terminal: #0f1117;
+    }
+    
+    [data-theme="light"] {
+      --bg: #f8f9fa;
+      --text: #212529;
+      --accent: #0066cc;
+      --accent-glow: #0066cc33;
+      --secondary: #cc0066;
+      --gray: #6c757d;
+      --card: #ffffff;
+      --terminal: #e9ecef;
+    }
+    
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Instrument Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: all 0.4s;
+    }
+    
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 5vw; }
+    
+    header {
+      height: 100vh;
+      min-height: 800px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    
+    .terminal-hero {
+      font-family: 'Fira Code', monospace;
+      font-size: clamp(1.2rem, 4vw, 2.2rem);
+      background: var(--terminal);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 900px;
+      box-shadow: 0 0 40px var(--accent-glow);
+    }
+    
+    .prompt { color: var(--accent); margin-bottom: 1rem; }
+    .typed { color: var(--text); }
+    
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(4rem, 12vw, 9rem);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      margin: 2rem 0;
+    }
+    
+    .hero-title span { background: linear-gradient(90deg, var(--accent), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    
+    .cta {
+      padding: 1rem 3rem;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .cta:hover { transform: translateY(-6px); box-shadow: 0 25px 50px var(--accent-glow); }
+    
+    .cursor { position:fixed; width:28px; height:28px; border:2px solid var(--accent); border-radius:50%; pointer-events:none; transform:translate(-50%,-50%); transition:all 0.12s; z-index:9999; mix-blend-mode:difference; }
+    .cursor::after { content:''; position:absolute; top:50%; left:50%; width:10px; height:10px; background:var(--accent); border-radius:50%; transform:translate(-50%,-50%); }
+    
+    #theme-toggle { position:fixed; top:2rem; right:3rem; background:none; border:none; font-size:2rem; cursor:pointer; z-index:1000; color:var(--text); }
+    
+    section { padding: 15vh 0; opacity:0; transform:translateY(80px); transition:all 1.2s ease; }
+    section.visible { opacity:1; transform:translateY(0); }
+    
+    .skills-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(340px,1fr)); gap:2.5rem; margin-top:4rem; }
+    
+    .skill-radar { text-align:center; }
+    canvas { max-width:100%; filter:drop-shadow(0 0 20px var(--accent-glow)); }
+    
+    .project-card, .cert-placeholder {
+      background:var(--card);
+      padding:2rem;
+      border-radius:12px;
+      border:1px solid var(--accent);
+      transition:all 0.4s;
+      text-align:center;
+    }
+    
+    .project-card:hover, .cert-placeholder:hover { transform:scale(1.05); box-shadow:0 0 30px var(--accent-glow); }
+    
+    footer { text-align:center; padding:6rem 0 3rem; color:var(--gray); font-size:0.95rem; }
+  </style>
+</head>
+<body>
+
+  <button id="theme-toggle" aria-label="Toggle theme">☀️</button>
+  <div class="cursor"></div>
+
+  <header>
+    <div class="container">
+      <div class="terminal-hero">
+        <div class="prompt">visitor@kinoti-sec:~$ <span class="typed" id="typed-text"></span><span class="blink">|</span></div>
+      </div>
+      <h1 class="hero-title">Brian <span>Kinoti</span></h1>
+      <p style="font-size:1.8rem; max-width:800px; color:var(--gray); margin:1.5rem 0;">
+        Computer Science Student • University of Nairobi • Aspiring Cybersecurity Professional<br>
+      </p>
+      <button class="cta" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Learn More ↓</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="about">
+      <h2 style="font-size:5rem; margin-bottom:2rem;">Who am I?</h2>
+      <p style="font-size:1.4rem; max-width:800px;">
+        Hi, I'm Brian Kinoti — a Computer Science student deeply interested in cybersecurity.<br><br>
+        I'm currently building foundational knowledge in ethical hacking, network security, threat detection, and secure coding. I'm passionate about understanding how systems can be protected (and sometimes broken) to make the digital world safer.<br><br>
+        Looking ahead: I'm preparing for my upcoming industrial attachment / internship in cybersecurity — excited to apply what I've learned in a real-world environment, contribute to security operations, and gain hands-on experience.
+      </p>
+    </section>
+
+    <section id="skills">
+      <h2 style="font-size:5rem; margin-bottom:2rem;">Current Skill Radar</h2>
+      <div class="skills-grid">
+        <div class="skill-radar">
+          <h3>My Growing Expertise (Student Level)</h3>
+          <canvas id="radarChart" width="500" height="500"></canvas>
+        </div>
+      </div>
+      <p style="text-align:center; margin-top:2rem; color:var(--gray); font-style:italic;">
+        Actively leveling up — watch this space grow with projects and certifications!
+      </p>
+    </section>
+
+    <section id="projects">
+      <h2 style="font-size:5rem; margin-bottom:2rem;">Projects & Learning Journey</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(340px,1fr)); gap:2.5rem; margin-top:3rem;">
+        <!-- Placeholder projects — replace with your real ones as you complete them -->
+        <div class="project-card">
+          <h3>Basic Network Scanner (Python)</h3>
+          <p>Built a simple port scanner using sockets & threading to understand network reconnaissance.</p>
+          <small>In progress • Python • Sockets</small>
+        </div>
+        
+        <div class="project-card">
+          <h3>Password Strength Analyzer</h3>
+          <p>Tool that checks password entropy, common patterns, and suggests improvements.</p>
+          <small>Personal project • Python • Regex</small>
+        </div>
+        
+        <div class="project-card">
+          <h3>CTF Write-ups & Challenges</h3>
+          <p>Solving beginner/intermediate CTFs on platforms like TryHackMe & HackTheBox.</p>
+          <small>Ongoing • Various tools</small>
+        </div>
+      </div>
+      <p style="text-align:center; margin:4rem 0; font-size:1.3rem;">
+        More projects coming soon — especially during my upcoming internship!
+      </p>
+    </section>
+
+    <section id="contact">
+      <h2 style="font-size:5rem; margin-bottom:2rem;">Get in Touch</h2>
+      <p style="font-size:1.6rem; max-width:700px;">
+        Open to cybersecurity internship / attachment opportunities, mentorship, collaborations, or just chatting about security topics.<br><br>
+        Email: <a href="mailto:brian@kinoti.dev" style="color:var(--accent)">brian@kinoti.dev</a> (or use school email)<br>
+        X / Twitter: <a href="https://x.com/yourhandle" style="color:var(--accent)">@yourhandle</a><br>
+        LinkedIn: <a href="https://linkedin.com/in/briankinoti" style="color:var(--accent)">linkedin.com/in/briankinoti</a><br><br>
+        Looking forward to connecting and learning together! 🔒
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Brian Kinoti • Computer Science Student • Built with curiosity & code • No trackers</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Theme toggle
+    const toggle = document.getElementById('theme-toggle');
+    toggle.addEventListener('click', () => {
+      document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+      toggle.textContent = document.documentElement.dataset.theme === 'light' ? '🌙' : '☀️';
+    });
+
+    // Custom cursor
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+
+    // Terminal typing effect – student-friendly messages
+    const strings = [
+      "whoami",
+      "Brian Kinoti – CS Student & Cybersecurity Enthusiast",
+      "cat interests.txt",
+      "Cybersecurity • Ethical Hacking • Network Security • Learning Every Day",
+      "echo 'Ready for internship opportunities'",
+      "Initializing student defenses..."
+    ];
+    let i = 0, char = 0, current = '';
+    function type() {
+      if (char < strings[i].length) {
+        current += strings[i].charAt(char++);
+        document.getElementById('typed-text').textContent = current;
+        setTimeout(type, 60);
+      } else {
+        setTimeout(() => {
+          current = ''; char = 0; i = (i + 1) % strings.length;
+          type();
+        }, 2200);
+      }
+    }
+    type();
+
+    // Radar Chart – adjusted for student (lower/moderate scores, growth mindset)
+    new Chart(document.getElementById('radarChart'), {
+      type: 'radar',
+      data: {
+        labels: ['Ethical Hacking', 'Network Security', 'Python Scripting', 'Web App Sec', 'Threat Intelligence', 'Cryptography Basics', 'CTF Challenges'],
+        datasets: [{
+          label: 'Current Level (Building Fast)',
+          data: [6, 5.5, 7, 5, 4.5, 5, 6.5],
+          backgroundColor: 'rgba(0,255,157,0.18)',
+          borderColor: 'rgba(0,255,157,0.9)',
+          borderWidth: 3,
+          pointBackgroundColor: '#00ff9d'
+        }]
+      },
+      options: {
+        scales: { r: { min: 0, max: 10, angleLines: { color: '#444' }, grid: { color: '#444' }, pointLabels: { color: 'white', font: { size: 14 } }, ticks: { color: 'white', backdropColor: 'transparent', stepSize: 2 } } },
+        plugins: { legend: { labels: { color: 'white', font: { size: 16 } } } }
+      }
+    });
+  </script>
+</body>
+</html>
